@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-
 const db = require("../utils/database");
 
 const Users = db.define("users", {
@@ -24,15 +23,22 @@ const Users = db.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  profileImage: {
+  gender: {
     type: DataTypes.STRING,
   },
-  phone: {
+  birthday: {
+    type: DataTypes.DATE,
+  },
+  profileImg: {
     type: DataTypes.STRING,
   },
-  isActive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true,
+  role: {
+    type: DataTypes.STRING,
+    defaultValue: "user",
+  },
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: "active",
   },
 });
 
