@@ -1,5 +1,5 @@
-const { UUIDV4 } = require("sequelize");
 const Movies = require("../models/movies.models");
+const uuid = require("uuid");
 
 const findAllMovies = async () => {
   const data = await Movies.findAll();
@@ -14,12 +14,17 @@ const createMovie = async (movieObj) => {
     releaseYear: movieObj.releaseYear,
     director: movieObj.director,
     duration: movieObj.duration,
-    trillerUrl: movieObj.trillerUrl,
-    coverUrl: movieObj.coverUrl,
-    movieUrl: movieObj.movieUrl,
+    trailer_url: movieObj.trailerUrl,
+    cover_url: movieObj.coverUrl,
+    movie_url: movieObj.movieUrl,
     classification: movieObj.classification,
     rating: movieObj.rating,
   };
   const data = await Movies.create(newMovie);
   return data;
+};
+
+module.exports = {
+  findAllMovies,
+  createMovie,
 };
