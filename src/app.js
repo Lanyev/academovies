@@ -4,6 +4,7 @@ const responseHandlers = require("./utils/handleResponses");
 const db = require("./utils/database");
 const initModels = require("./models/initModels");
 const config = require("../config").api;
+const upload = require("./utils/multer");
 
 const userRouter = require("./users/users.router");
 const authRouter = require("./auth/auth.router");
@@ -30,6 +31,16 @@ app.get("/", (req, res) => {
     data: {
       users: `${config.host}/api/v1/users`,
     },
+  });
+});
+
+app.post("/upload-file", upload.single("myImage"), (req, res) => {
+  console.log(req.file);
+  responseHandlers.success({
+    res,
+    status: 200,
+    message: "File uploaded successfully",
+    data: req.file,
   });
 });
 
