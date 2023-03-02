@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("../utils/database");
+const Series = require("./series.models");
 
 const Seasons = db.define("seasons", {
   id: {
@@ -9,6 +10,10 @@ const Seasons = db.define("seasons", {
   serieId: {
     type: DataTypes.UUID,
     allowNull: false,
+    references: {
+      model: Series,
+      key: "id",
+    },
   },
   title: {
     type: DataTypes.STRING,

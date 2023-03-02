@@ -8,49 +8,24 @@ const MoviesGenres = require("./moviesGenres.models");
 const SeriesGenres = require("./seriesGenres.models");
 
 const initModels = () => {
-  // Users -> Movies
-  Users.hasMany(Movies);
-  Movies.belongsTo(Users);
+  // Users
+  Users;
 
-  // Users -> Series
-  Users.hasMany(Series);
-  Series.belongsTo(Users);
+  // Movies <=> Genres - MoviesGenres
+  Movies.belongsToMany(Genres, { through: MoviesGenres });
+  Genres.belongsToMany(Movies, { through: MoviesGenres });
 
-  // Genres -> Movies
-  Genres.hasMany(Movies);
-  Movies.belongsTo(Genres);
+  // Series <=> Genres - SeriesGenres
+  Series.belongsToMany(Genres, { through: SeriesGenres });
+  Genres.belongsToMany(Series, { through: SeriesGenres });
 
-  // Genres -> Series
-  Genres.hasMany(Series);
-  Series.belongsTo(Genres);
-
-  // Series -> Seasons
+  // Series <=> Seasons
   Series.hasMany(Seasons);
   Seasons.belongsTo(Series);
 
-  // Series -> Episodes
-  Series.hasMany(Episodes);
-  Episodes.belongsTo(Series);
-
-  // Seasons -> Episodes
+  // Seasons <=> Episodes
   Seasons.hasMany(Episodes);
   Episodes.belongsTo(Seasons);
-
-  // Movies -> MoviesGenres
-  Movies.hasMany(MoviesGenres);
-  MoviesGenres.belongsTo(Movies);
-
-  // Genres -> MoviesGenres
-  Genres.hasMany(MoviesGenres);
-  MoviesGenres.belongsTo(Genres);
-
-  // Series -> SeriesGenres
-  Series.hasMany(SeriesGenres);
-  SeriesGenres.belongsTo(Series);
-
-  // Genres -> SeriesGenres
-  Genres.hasMany(SeriesGenres);
-  SeriesGenres.belongsTo(Genres);
 };
 
 module.exports = initModels;

@@ -43,8 +43,8 @@ const Movies = db.define("movies", {
     allowNull: false,
   },
   rating: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
   },
 });
 
