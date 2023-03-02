@@ -57,7 +57,53 @@ const postMovie = async (req, res) => {
   }
 };
 
+const postGenreToMovie = (req, res) => {
+  const { movieId, genreId } = req.params;
+  movieControllers
+    .addGenreToMovie({ movieId, genreId })
+    .then((data) => {
+      responses.success({
+        res,
+        status: 201,
+        data,
+        message: "Genre added to movie",
+      });
+    })
+    .catch((err) => {
+      responses.error({
+        res,
+        data: err,
+        message: "Something bad adding the genre to the movie",
+        status: 400,
+      });
+    });
+};
+
+const getAllMoviesByGenre = (req, res) => {
+  const genreId = req.params.genreId;
+  movieControllers
+    .findAllMoviesByGenre(genreId)
+    .then((data) => {
+      responses.success({
+        res,
+        status: 200,
+        data,
+        message: "Getting all the movies by genre",
+      });
+    })
+    .catch((err) => {
+      responses.error({
+        res,
+        data: err,
+        message: "Something bad getting the movies by genre",
+        status: 400,
+      });
+    });
+};
+
 module.exports = {
   getAllMovies,
   postMovie,
+  postGenreToMovie,
+  getAllMoviesByGenre,
 };

@@ -1,6 +1,6 @@
-const Genres = require("./genres.model");
+const Genres = require("../models/genres.models");
 
-const findAllGenres = async (req, res) => {
+const findAllGenres = async () => {
   const data = await Genres.findAll();
   return data;
 };
