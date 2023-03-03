@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+
 const db = require("../utils/database");
 
 const Users = db.define("users", {
@@ -20,29 +21,29 @@ const Users = db.define("users", {
     unique: true,
     validate: {
       isEmail: true,
-    },
+    }
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
+  },
+  profileImage:{
+    type: DataTypes.STRING
   },
   gender: {
     type: DataTypes.STRING,
   },
-  birthday: {
-    type: DataTypes.DATE,
-  },
-  profileImg: {
-    type: DataTypes.STRING,
+  birthday:{
+    type: DataTypes.DATE
   },
   role: {
     type: DataTypes.STRING,
-    defaultValue: "user",
+    defaultValue: 'normal'
   },
-  status: {
-    type: DataTypes.STRING,
-    defaultValue: "active",
-  },
+  isActive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
+  }
 });
 
-module.exports = Users;
+module.exports = Users
