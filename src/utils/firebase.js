@@ -1,48 +1,45 @@
-const firebase = require("firebase/app");
-//? The Firebase App (firebase.app()) is always required and must be the first thing you import.
-//? It contains the core firebase client (the firebase namespace) and should be used to
-//? initialize and configure Firebase services.
-const {
-  getStorage,
-  uploadBytes,
-  ref,
-  getDownloadURL,
-} = require("firebase/storage");
-//? The Firebase Storage SDK to upload files.
-const config = require("../../config").api.firebase;
+const firebase = require('firebase/app')
+const { getStorage, uploadBytes, ref, getDownloadURL } = require('firebase/storage')
 
-const firebaseApp = firebase.initializeApp(config);
+const config = require('../../config').api.firebase
 
-const storage = getStorage(firebaseApp);
+const firebaseApp = firebase.initializeApp(config)
 
-//! Peliculas
+const storage = getStorage(firebaseApp)
+
+//? peliculas
+
 const addToFirebaseMovieVideo = async (file) => {
-  const movieRef = ref(
-    storage,
-    `movieVideos/${Date.now()}-${file.originalname}`
-  );
+    const movieRef = ref(storage, `movieVideos/${Date.now()}-${file.originalname}`)
 
-  await uploadBytes(movieRef, file.buffer);
-  const movieUrl = await getDownloadURL(movieRef);
-  return movieUrl;
-};
+    await uploadBytes(movieRef, file.buffer)
+    const movieUrl = await getDownloadURL(movieRef)
+    return movieUrl
+}
 
-//! Cover de peliculas
-const addToFirebaseMovieCover = async (file, name, season) => {
-  const movieRef = ref(
-    storage,
-    `movieCovers/${name}/${season}/${Date.now()}-${file.originalname}`
-  );
+//? cover pelicula
 
-  await uploadBytes(movieRef, file.buffer);
-  const movieUrl = await getDownloadURL(movieRef);
-  return movieUrl;
-};
+const addToFirebaseMovieCover = async (file) => {
+    const movieRef = ref(storage, `movieCover/${Date.now()}-${file.originalname}`)
 
-//! Series - Nombre - Temporada - Cover
-//! Cover de series - Temporada - Capitulo
+    await uploadBytes(movieRef, file.buffer)
+    const movieUrl = await getDownloadURL(movieRef)
+    return movieUrl
+}
+
+const addToFirebaseSerieSeasonCover = async (file, name, season) => {
+    const movieRef = ref(storage, `Serie/${name}/${season}/${Date.now()}-${file.originalname}`)
+
+    await uploadBytes(movieRef, file.buffer)
+    const movieUrl = await getDownloadURL(movieRef)
+    return movieUrl
+}
+
+//? Serie - Name - Temporada - Cover
+//? Serie - Name - Temporada - Capitulo
+
+
 
 module.exports = {
-  addToFirebaseMovieVideo,
-  addToFirebaseMovieCover,
-};
+    addToFirebaseMovieVideo
+}

@@ -1,31 +1,31 @@
-const Users = require("./users.models");
-const Genres = require("./genres.models");
-const Series = require("./series.models");
-const Seasons = require("./seasons.models");
-const Episodes = require("./episodes.models");
-const Movies = require("./movies.models");
-const MoviesGenres = require("./moviesGenres.models");
-const SeriesGenres = require("./seriesGenres.models");
+const Users = require("./users.models")
+const Movies = require('./movies.models')
+const Episodes = require("./episodes.models")
+const Genres = require("./genres.models")
+const MovieGenres = require("./movie_genres.models")
+const Seasons = require("./seasons.models")
+const SerieGenres = require("./serie_genres.models")
+const Series = require("./series.models")
 
 const initModels = () => {
-  // Users
-  Users;
+    //? Users
+    Users
 
-  // Movies <=> Genres - MoviesGenres
-  Movies.belongsToMany(Genres, { through: MoviesGenres });
-  Genres.belongsToMany(Movies, { through: MoviesGenres });
+    //? Movies <-> Genres - MovieGenres
+    Movies.belongsToMany(Genres, {through: MovieGenres})
+    Genres.belongsToMany(Movies, {through: MovieGenres})
 
-  // Series <=> Genres - SeriesGenres
-  Series.belongsToMany(Genres, { through: SeriesGenres });
-  Genres.belongsToMany(Series, { through: SeriesGenres });
+    //? Series <-> Genres - SerieGenres 
+    Series.belongsToMany(Genres, {through: SerieGenres})
+    Genres.belongsToMany(Series, {through: SerieGenres})
 
-  // Series <=> Seasons
-  Series.hasMany(Seasons);
-  Seasons.belongsTo(Series);
+    //? Series -> Seasons 
+    Series.hasMany(Seasons)
+    Seasons.belongsTo(Series)
 
-  // Seasons <=> Episodes
-  Seasons.hasMany(Episodes);
-  Episodes.belongsTo(Seasons);
-};
+    //? Seasons -> Episodes 
+    Seasons.hasMany(Episodes)
+    Episodes.belongsTo(Seasons)
+}
 
-module.exports = initModels;
+module.exports = initModels

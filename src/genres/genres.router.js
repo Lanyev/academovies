@@ -1,7 +1,9 @@
-const router = require("express").Router();
+const router = require('express').Router()
 
-const genreServices = require("./genres.services");
+const genreServices = require('./genres.services')
 
-router.route("/").get(genreServices.getAllGenres).post(genreServices.postGenre);
+router.route('/')
+    .get(genreServices.getAllGenres)
+    .post(genreServices.postGenre)
 
-module.exports = router;
+module.exports = router
