@@ -108,8 +108,6 @@ El proyecto ha sido una experiencia desafiante y enriquecedora que nos ha permit
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
-
 <!-- CONTRIBUTING -->
 
 ## Contribución
